@@ -334,12 +334,17 @@ begin
 end;
 
 procedure TBig_Hash_Pair_Pool<TKey_, TValue_>.Remove(p: PPair_Pool_Value__);
+begin
+  Remove(p, True);
+end;
+
+procedure TBig_Hash_Pair_Pool<TKey_, TValue_>.Remove(p: PPair_Pool_Value__; Do_Free_Recycle_Pool_: Boolean);
 var
   inst_: TValue_Pair_Pool__.TPair_BigList__;
 begin
   inst_ := p^.Instance___;
   inst_.Remove_P(p);
-  if inst_.Num <= 0 then
+  if (Do_Free_Recycle_Pool_) and (inst_.Num <= 0) then
       Free_Recycle_Pool();
 end;
 
@@ -1184,6 +1189,11 @@ begin
 end;
 
 procedure TCritical_Big_Hash_Pair_Pool<TKey_, TValue_>.Remove(p: PPair_Pool_Value__);
+begin
+  Remove(p, True);
+end;
+
+procedure TCritical_Big_Hash_Pair_Pool<TKey_, TValue_>.Remove(p: PPair_Pool_Value__; Do_Free_Recycle_Pool_: Boolean);
 var
   inst_: TValue_Pair_Pool__.TPair_BigList__;
 begin
@@ -1194,7 +1204,7 @@ begin
   finally
       FCritical__.UnLock;
   end;
-  if inst_.Num <= 0 then
+  if (Do_Free_Recycle_Pool_) and (inst_.Num <= 0) then
       Free_Recycle_Pool();
 end;
 
