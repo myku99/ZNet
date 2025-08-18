@@ -1036,7 +1036,8 @@ type
     procedure Set_Key_Value(const Key: TKey_; const Value: TValue_);
     property Key_Value[const Key: TKey_]: TValue_ read Get_Key_Value write Set_Key_Value; default;
     procedure Delete(const Key: TKey_);
-    procedure Remove(p: PPair_Pool_Value__);
+    procedure Remove(p: PPair_Pool_Value__); overload;
+    procedure Remove(p: PPair_Pool_Value__; Do_Free_Recycle_Pool_:Boolean); overload;
     function Num: NativeInt;
     property Count: NativeInt read Num;
     function GetSum: NativeInt;
@@ -1154,7 +1155,8 @@ type
     procedure Set_Key_Value(const Key: TKey_; const Value: TValue_);
     property Key_Value[const Key: TKey_]: TValue_ read Get_Key_Value write Set_Key_Value; default;
     procedure Delete(const Key: TKey_);
-    procedure Remove(p: PPair_Pool_Value__);
+    procedure Remove(p: PPair_Pool_Value__); overload;
+    procedure Remove(p: PPair_Pool_Value__; Do_Free_Recycle_Pool_:Boolean); overload;
     function Num: NativeInt;
     property Count: NativeInt read Num;
     function GetSum: NativeInt;
